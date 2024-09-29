@@ -1,9 +1,10 @@
 from pydantic import BaseModel
 
 class Message(BaseModel):
-    id: int
+    idapp: int
     name: str
     pin: int
+    event: str
 
 class Message(BaseModel):
     subject: str
