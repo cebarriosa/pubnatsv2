@@ -6,7 +6,7 @@ import nats
 from nats.errors import TimeoutError
 from fastapi import HTTPException
 
-async def pub_message(message):
+async def pub_message(message, natsName):
     
     nc = await nats.connect("nats://localhost:4222")
     # Create JetStream context.
@@ -16,7 +16,7 @@ async def pub_message(message):
     subject =  message.subject
     data = json.dumps(message.data.dict()).encode()
     
-    await js.add_stream(name="sample-pbf", subjects=[subject])    
+    await js.add_stream(name=natsName, subjects=[subject])    
     try:  
         await js.publish(subject, data)
 
